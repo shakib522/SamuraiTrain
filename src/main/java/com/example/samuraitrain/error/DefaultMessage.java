@@ -10,7 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class DefaultMessage {
-    private String status;
     private String message;
-    private Integer statusCode;
 }

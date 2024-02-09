@@ -18,11 +18,21 @@ public class RestErrorResponse extends ResponseEntityExceptionHandler {
     @ResponseBody
     public ResponseEntity<DefaultMessage> defaultException(DefaultException exception) {
         DefaultMessage message = new DefaultMessage(
-                "Failed",
-                exception.getMessage(),
-                exception.getStatusCode()
+                exception.getMessage()
         );
         return ResponseEntity.status(exception.getStatusCode()).body(message);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleExceptionInternal(
+            Exception ex, Object body,
+            HttpHeaders headers,
+            HttpStatusCode statusCode, WebRequest request
+    ) {
+        DefaultMessage message = new DefaultMessage(
+                ex.getMessage()
+        );
+        return ResponseEntity.status(statusCode.value()).body(message);
     }
 
 
